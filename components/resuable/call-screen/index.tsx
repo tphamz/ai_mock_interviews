@@ -9,8 +9,14 @@ type Props = {
   user?: User;
   vapiArgs: any[];
   onCallEnded: (val: any) => any;
+  type: "generate-interview" | "start-interview";
 };
-export default function CallScreen({ user, vapiArgs, onCallEnded }: Props) {
+export default function CallScreen({
+  user,
+  vapiArgs,
+  onCallEnded,
+  type,
+}: Props) {
   const {
     isSpeechActive,
     callStatus,
@@ -32,7 +38,7 @@ export default function CallScreen({ user, vapiArgs, onCallEnded }: Props) {
           <CallProfile
             isActive={activeTranscript?.role === "assistant"}
             icon={<Bot className="!w-20 !h-20" />}
-            name="Interviewer"
+            name="Assistant"
           />
           <CallProfile
             isActive={activeTranscript?.role === "user"}
@@ -60,12 +66,18 @@ export default function CallScreen({ user, vapiArgs, onCallEnded }: Props) {
       <Card className="rounded-2xl md:w-[500px] w-full md:h-full border-muted shadow-xl card-bg">
         <CardContent className="w-full h-full overflow-y-auto">
           {messages.map((item) => (
-            <div>{item.role + ": " + item.transcript}</div>
+            <p>
+              <span className="font-bold capitalize">{item.role}:</span>
+              <span className="italic">{item.transcript}</span>
+            </p>
           ))}
           {activeTranscript && (
-            <div>
-              {activeTranscript.role + ": " + activeTranscript.transcript}
-            </div>
+            <p>
+              <span className="font-bold capitalize">
+                {activeTranscript.role}:
+              </span>
+              <span className="italic">{activeTranscript.transcript}</span>
+            </p>
           )}
         </CardContent>
       </Card>
