@@ -25,7 +25,7 @@ export default function CreateInterviewPage() {
   return (
     <CallScreen
       vapiArgs={[
-        "0453ed3f-ff43-452d-a8c3-761f0a046916",
+        process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID,
         {
           variableValues: {
             name: user.name,
@@ -35,6 +35,7 @@ export default function CreateInterviewPage() {
       ]}
       user={user}
       onCallEnded={onCallEnd}
+      type="generate-interview"
     />
   );
 }
