@@ -1,7 +1,7 @@
-import AuthForm from "@/components/AuthForm";
+import { SignUp } from "@clerk/nextjs";
 
 const Page = () => {
-  return <AuthForm type="sign-up" />;
+  return <SignUp />;
 };
 
 export default Page;

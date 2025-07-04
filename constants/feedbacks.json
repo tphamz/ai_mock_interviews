@@ -1,0 +1,207 @@
+[
+  {
+    "interviewId": "a1e8c1a3-61a9-403a-929b-72a7f1c3a7d1",
+    "totalScore": 7.8,
+    "categoryScores": [
+      {
+        "name": "Communication Skills",
+        "score": 8,
+        "comment": "Clear explanations with good articulation, though could be more concise."
+      },
+      {
+        "name": "Technical Knowledge",
+        "score": 7,
+        "comment": "Good understanding of React basics; some hesitation with advanced hooks."
+      },
+      {
+        "name": "Problem Solving",
+        "score": 8,
+        "comment": "Approaches problems methodically with room to improve efficiency."
+      },
+      {
+        "name": "Cultural Fit",
+        "score": 8,
+        "comment": "Collaborative mindset and eager to learn."
+      },
+      {
+        "name": "Confidence and Clarity",
+        "score": 8,
+        "comment": "Confident in core concepts but second-guessed a few answers."
+      }
+    ],
+    "strengths": [
+      "Good grasp of frontend fundamentals",
+      "Strong communication",
+      "Team-oriented mindset"
+    ],
+    "areasForImprovement": [
+      "Deeper familiarity with React hooks",
+      "Practice more concise answers"
+    ],
+    "createdAt": "2025-07-02T09:00:00Z"
+  },
+  {
+    "interviewId": "b4f5d2c7-5cd4-470a-b04d-9573c1c0737b",
+    "totalScore": 8.2,
+    "categoryScores": [
+      {
+        "name": "Communication Skills",
+        "score": 7,
+        "comment": "Clear communicator, though sometimes went into too much detail."
+      },
+      {
+        "name": "Technical Knowledge",
+        "score": 9,
+        "comment": "Solid grasp of Express, middleware, and database design."
+      },
+      {
+        "name": "Problem Solving",
+        "score": 8,
+        "comment": "Tackled complex backend scenarios efficiently."
+      },
+      {
+        "name": "Cultural Fit",
+        "score": 9,
+        "comment": "Demonstrated strong alignment with team values and agile principles."
+      },
+      {
+        "name": "Confidence and Clarity",
+        "score": 8,
+        "comment": "Generally confident, with minor pauses on edge-case topics."
+      }
+    ],
+    "strengths": [
+      "Strong backend knowledge",
+      "Understands scalable systems",
+      "Team alignment"
+    ],
+    "areasForImprovement": [
+      "Tighten explanations to save time",
+      "Prepare more examples on error handling"
+    ],
+    "createdAt": "2025-07-02T09:00:00Z"
+  },
+  {
+    "interviewId": "f1a2b3c4-9876-4321-bb8a-d4567e123456",
+    "totalScore": 9.0,
+    "categoryScores": [
+      {
+        "name": "Communication Skills",
+        "score": 9,
+        "comment": "Very articulate with great storytelling around past projects."
+      },
+      {
+        "name": "Technical Knowledge",
+        "score": 8,
+        "comment": "Deep understanding of design systems and user research."
+      },
+      {
+        "name": "Problem Solving",
+        "score": 9,
+        "comment": "Creative and thoughtful approaches to design challenges."
+      },
+      {
+        "name": "Cultural Fit",
+        "score": 10,
+        "comment": "Values aligned perfectly with our product and user-first culture."
+      },
+      {
+        "name": "Confidence and Clarity",
+        "score": 9,
+        "comment": "Clear, poised, and confident in her approach and past impact."
+      }
+    ],
+    "strengths": [
+      "User-centered thinking",
+      "Strong cross-functional collaboration",
+      "Clear design process"
+    ],
+    "areasForImprovement": [
+      "Could discuss design trade-offs in more depth",
+      "Mention usability metrics more explicitly"
+    ],
+    "createdAt": "2025-07-02T09:00:00Z"
+  },
+  {
+    "interviewId": "9e9f1a7b-bd38-4132-9dc6-278f9435fe2a",
+    "totalScore": 8.6,
+    "categoryScores": [
+      {
+        "name": "Communication Skills",
+        "score": 8,
+        "comment": "Communicated technical decisions well with minimal jargon."
+      },
+      {
+        "name": "Technical Knowledge",
+        "score": 9,
+        "comment": "Demonstrated expertise in DevOps tooling and practices."
+      },
+      {
+        "name": "Problem Solving",
+        "score": 9,
+        "comment": "Offered thoughtful solutions for deployment and infra problems."
+      },
+      {
+        "name": "Cultural Fit",
+        "score": 8,
+        "comment": "Strong emphasis on collaboration and transparency."
+      },
+      {
+        "name": "Confidence and Clarity",
+        "score": 9,
+        "comment": "Confident and composed under technical scrutiny."
+      }
+    ],
+    "strengths": [
+      "Deep AWS knowledge",
+      "Strong grasp of CI/CD",
+      "Solid infrastructure design"
+    ],
+    "areasForImprovement": [
+      "Could elaborate more on Terraform limitations",
+      "Needs more examples from past team conflicts"
+    ],
+    "createdAt": "2025-07-02T09:00:00Z"
+  },
+  {
+    "interviewId": "dc3ae72f-e5b6-4722-b8fd-3253adcc9876",
+    "totalScore": 8.1,
+    "categoryScores": [
+      {
+        "name": "Communication Skills",
+        "score": 8,
+        "comment": "Explains architecture clearly and logically."
+      },
+      {
+        "name": "Technical Knowledge",
+        "score": 8,
+        "comment": "Strong across the full stack, especially with Next.js and PostgreSQL."
+      },
+      {
+        "name": "Problem Solving",
+        "score": 8,
+        "comment": "Good debugging mindset and handled edge cases well."
+      },
+      {
+        "name": "Cultural Fit",
+        "score": 7,
+        "comment": "Open-minded and pragmatic, but could show more enthusiasm."
+      },
+      {
+        "name": "Confidence and Clarity",
+        "score": 9,
+        "comment": "Confident with clear structure in responses."
+      }
+    ],
+    "strengths": [
+      "Full stack versatility",
+      "Clean architectural thinking",
+      "Strong confidence"
+    ],
+    "areasForImprovement": [
+      "More energy in personal pitch",
+      "Expand on performance optimization techniques"
+    ],
+    "createdAt": "2025-07-02T09:00:00Z"
+  }
+]

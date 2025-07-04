@@ -24,6 +24,9 @@
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  },
   "typescript.tsdk": "node_modules/typescript/lib",
   "editor.wordWrap": "on"
 }

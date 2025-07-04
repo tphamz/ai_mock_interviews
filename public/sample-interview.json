@@ -1,0 +1,50 @@
+[
+  {
+    "title": "Behavioral Interview",
+    "duration": "30–45 minutes",
+    "description": "Practice common behavioral questions and STAR method responses",
+    "aiAgent": "Emma Wilson",
+    "level": "Tech Company Focus",
+    "cover": "cover1.jpg"
+  },
+  {
+    "title": "JavaScript Interview",
+    "duration": "45–60 minutes",
+    "description": "Deep dive into JavaScript concepts, ES6+, and problem solving",
+    "aiAgent": "Alex Chen",
+    "level": "FAANG Level",
+    "cover": "cover2.jpg"
+  },
+  {
+    "title": "Frontend Interview",
+    "duration": "50–70 minutes",
+    "description": "React, CSS, HTML, and modern frontend development practices",
+    "aiAgent": "Maria Rodriguez",
+    "level": "Startup Focus",
+    "cover": "cover3.jpg"
+  },
+  {
+    "title": "System Design",
+    "duration": "60–90 minutes",
+    "description": "Design scalable systems and discuss architecture patterns",
+    "aiAgent": "David Kim",
+    "level": "Senior Level",
+    "cover": "cover4.jpg"
+  },
+  {
+    "title": "Backend Interview",
+    "duration": "45–60 minutes",
+    "description": "APIs, databases, server architecture, and backend technologies",
+    "aiAgent": "Sarah Thompson",
+    "level": "Enterprise Focus",
+    "cover": "cover5.jpg"
+  },
+  {
+    "title": "Data Structures & Algorithms",
+    "duration": "60–75 minutes",
+    "description": "Coding challenges, algorithms, and data structure problems",
+    "aiAgent": "Michael Park",
+    "level": "Big Tech Focus",
+    "cover": "cover6.jpg"
+  }
+]

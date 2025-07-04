@@ -1,0 +1,77 @@
+[
+  {
+    "id": "a1e8c1a3-61a9-403a-929b-72a7f1c3a7d1",
+    "role": "Frontend Engineer",
+    "level": "Junior",
+    "type": "Technical",
+    "techStack": ["React", "JavaScript", "HTML", "CSS"],
+    "interviewResults": [],
+    "cover": "cover1.jpg",
+    "questions": [
+      "How does the virtual DOM work in React?",
+      "Can you explain the difference between var, let, and const?",
+      "How would you structure a responsive layout using CSS Grid or Flexbox?"
+    ],
+    "createdAt": "2025-07-02T09:00:00Z"
+  },
+  {
+    "id": "b4f5d2c7-5cd4-470a-b04d-9573c1c0737b",
+    "role": "Backend Developer",
+    "level": "Mid",
+    "type": "Technical",
+    "techStack": ["Node.js", "Express", "MongoDB"],
+    "interviewResults": [],
+    "cover": "cover2.jpg",
+    "questions": [
+      "How do you handle error management in Express?",
+      "What are the pros and cons of using MongoDB for a large-scale application?",
+      "How do middleware functions work in Node.js?"
+    ],
+    "createdAt": "2025-07-02T09:00:00Z"
+  },
+  {
+    "id": "f1a2b3c4-9876-4321-bb8a-d4567e123456",
+    "role": "Product Designer",
+    "level": "Senior",
+    "type": "Behavioral",
+    "techStack": ["Figma", "Sketch", "Design Systems"],
+    "interviewResults": [],
+    "cover": "cover3.jpg",
+    "questions": [
+      "Tell me about a time you advocated for the user in a product decision.",
+      "How do you collaborate with engineers and product managers?",
+      "Describe a time you had to redesign a feature under tight deadlines."
+    ],
+    "createdAt": "2025-07-02T09:00:00Z"
+  },
+  {
+    "id": "9e9f1a7b-bd38-4132-9dc6-278f9435fe2a",
+    "role": "DevOps Engineer",
+    "level": "Senior",
+    "type": "Technical",
+    "techStack": ["AWS", "Docker", "Terraform", "CI/CD"],
+    "interviewResults": [],
+    "cover": "cover4.jpg",
+    "questions": [
+      "What is the difference between blue-green and canary deployments?",
+      "How would you set up a CI/CD pipeline for a microservices architecture?",
+      "Explain how you would secure secrets in an AWS environment."
+    ],
+    "createdAt": "2025-07-02T09:00:00Z"
+  },
+  {
+    "id": "dc3ae72f-e5b6-4722-b8fd-3253adcc9876",
+    "role": "Full Stack Developer",
+    "level": "Mid",
+    "type": "Technical",
+    "techStack": ["Next.js", "TypeScript", "PostgreSQL", "TailwindCSS"],
+    "interviewResults": [],
+    "cover": "cover5.jpg",
+    "questions": [
+      "How would you implement server-side rendering in Next.js?",
+      "What are the benefits of using TypeScript in a full stack application?",
+      "How would you design a scalable database schema for a blog platform?"
+    ],
+    "createdAt": "2025-07-02T09:00:00Z"
+  }
+]

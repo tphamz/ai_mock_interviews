@@ -13,17 +13,14 @@ interface Feedback {
   createdAt: string;
 }
 
-interface Interview {
-  id: string;
+type CreateInterviewProps = {
+  type: string;
   role: string;
   level: string;
-  questions: string[];
-  techstack: string[];
-  createdAt: string;
+  techstack: string;
+  numberOfQuestions: string;
   userId: string;
-  type: string;
-  finalized: boolean;
-}
+};
 
 interface CreateFeedbackParams {
   interviewId: string;
@@ -69,18 +66,6 @@ interface GetFeedbackByInterviewIdParams {
 interface GetLatestInterviewsParams {
   userId: string;
   limit?: number;
-}
-
-interface SignInParams {
-  email: string;
-  idToken: string;
-}
-
-interface SignUpParams {
-  uid: string;
-  name: string;
-  email: string;
-  password: string;
 }
 
 type FormType = "sign-in" | "sign-up";
