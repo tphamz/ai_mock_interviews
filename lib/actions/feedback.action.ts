@@ -8,7 +8,6 @@ import { generateObject } from "ai";
 import { withAuth } from "./auth.action";
 import { findCount, prismaClient } from "../prisma.sdk";
 import { Feedback } from "@prisma/client";
-import { error } from "console";
 
 type GetFeedbacksProps = {
   items: Feedback[];
