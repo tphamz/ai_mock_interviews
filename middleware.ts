@@ -8,11 +8,11 @@ const isPublicRoute = createRouteMatcher([
   "onboarding(.*)",
   "terms(.*)",
   "privacy(.*)",
-  "api/vapi",
+  "/api/vapi(.*)",
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
-  console.log("clerkMiddleware::here");
+  console.log("clerkMiddleware::here::", req);
   if (!isPublicRoute(req)) {
     console.log("clerkMiddleware::protected");
     await auth.protect();
