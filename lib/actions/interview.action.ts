@@ -44,6 +44,7 @@ export async function getCreateInterviewSummary(id: string) {
 
 export async function createInterview(params: CreateInterviewProps) {
   try {
+    console.log("params::", params);
     const res = await generateText({
       model: openai("gpt-4o"),
       prompt: createInterviewPrompt(params),

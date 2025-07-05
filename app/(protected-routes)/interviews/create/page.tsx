@@ -17,7 +17,7 @@ export default function CreateInterviewPage() {
   }, []);
 
   const onCallEnd = async (callDetail: any) => {
-    const res = await getCreateInterviewSummary(callDetail.id);
+    // const res = await getCreateInterviewSummary(callDetail.id);
     console.log(res);
   };
 
@@ -29,7 +29,7 @@ export default function CreateInterviewPage() {
         {
           variableValues: {
             name: user.name,
-            userid: user.id,
+            userId: user.id,
           },
         },
       ]}
