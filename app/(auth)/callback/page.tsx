@@ -13,7 +13,7 @@ const AuthCallbackPage = async () => {
     auth.status === 400 ||
     auth.status === 500
   ) {
-    redirect("/");
+    redirect("/sign-in");
   }
 };
 
