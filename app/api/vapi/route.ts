@@ -1,5 +1,19 @@
 import { createInterview } from "@/lib/actions/interview.action";
 
+const ALLOWED_ORIGIN = "*";
+
+export async function OPTIONS() {
+  return new Response(null, {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": ALLOWED_ORIGIN,
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      "Access-Control-Allow-Credentials": "true",
+    },
+  });
+}
+
 export async function POST(request: Request) {
   try {
     const { type, role, level, techStack, numberOfQuestions, userId } =
