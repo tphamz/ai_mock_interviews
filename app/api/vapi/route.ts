@@ -46,6 +46,7 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
+  console.log("I am here");
   return Response.json(
     { success: true, data: "Thank you!" },
     { status: 200, headers: { "Access-Control-Allow-Origin": ALLOWED_ORIGIN } }
