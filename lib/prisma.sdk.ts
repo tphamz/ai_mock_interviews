@@ -9,4 +9,4 @@ export const prismaClient = global.prisma || new PrismaClient();
 if (process.env.NODE_ENV !== "production") global.prisma = prismaClient;
 
 export const findCount = async (client: any, where: any) =>
-  await client.findCount({ where });
+  await client.count({ where });

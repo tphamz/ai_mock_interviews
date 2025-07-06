@@ -1,4 +1,3 @@
-import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -10,74 +9,50 @@ import {
 import { Clock, Star } from "lucide-react";
 
 type Props = {
-  title: string;
-  status: "complete" | "in-progress";
-  rating?: number;
-  duration: string;
-  aiAgent: string;
+  interview: { role: string; level: string; type: string };
+  createdDate: string;
+  categoryScores: { name: string; score: number; comment: string }[];
   className?: string;
 };
-
-const badgeStatus = new Map<string, [string, string]>([
-  ["complete", ["bg-green-500 text-white dark:bg-green-600", "Completed"]],
-  ["in-progress", ["bg-blue-500 text-white dark:bg-blue-600", "In Progress"]],
-]);
 export default function FeedbackCard(props: Props) {
+  const score =
+    (props.categoryScores || []).reduce(
+      (res: number, item: any) => res + item.score,
+      0
+    ) / (props.categoryScores || []).length;
   return (
-    <Card className={`${props.className || ""} `}>
-      <CardHeader>
-        <div className="flex row-flex justify-between items-center">
-          <CardTitle>{props.title}</CardTitle>
-          <Badge
-            variant="default"
-            className={badgeStatus.get(props.status)![0]}
-          >
-            {badgeStatus.get(props.status)![1]}
-          </Badge>
-        </div>
-      </CardHeader>
+    <Card className={`${props.className || ""} swing-in-top-fwd`}>
+      {props.interview && (
+        <CardHeader>
+          <div className="flex row-flex justify-between items-center">
+            <CardTitle>{props.interview.role}</CardTitle>
+            <CardDescription>{props.interview.type}</CardDescription>
+          </div>
+          <CardDescription>{props.interview.level}</CardDescription>
+        </CardHeader>
+      )}
       <CardContent className="flex-auto">
         <div className="flex flex-col justify-end w-full h-full gap-2">
           <div className="flex flex-row gap-1">
-            <Star
-              className={
-                Math.floor((props.rating || 0) / 1) ? "fill-amber-400" : ""
-              }
-            />
-            <Star
-              className={
-                Math.floor((props.rating || 0) / 2) ? "fill-amber-400" : ""
-              }
-            />
-            <Star
-              className={
-                Math.floor((props.rating || 0) / 3) ? "fill-amber-400" : ""
-              }
-            />
-            <Star
-              className={
-                Math.floor((props.rating || 0) / 4) ? "fill-amber-400" : ""
-              }
-            />
-            <Star
-              className={
-                Math.floor((props.rating || 0) / 5) ? "fill-amber-400" : ""
-              }
-            />
+            <Star className={Math.floor(score / 1) ? "fill-amber-400" : ""} />
+            <Star className={Math.floor(score / 2) ? "fill-amber-400" : ""} />
+            <Star className={Math.floor(score / 3) ? "fill-amber-400" : ""} />
+            <Star className={Math.floor(score / 4) ? "fill-amber-400" : ""} />
+            <Star className={Math.floor(score / 5) ? "fill-amber-400" : ""} />
           </div>
           <CardDescription>
-            <div className="flex flex-row gap-2 items-center">
-              <Clock className="text-muted-foreground w-4 h-4" />
-              <div className="text-muted-foreground">{props.duration}</div>
+            <div className="flex flex-col gap-1 mt-2">
+              {(props.categoryScores || []).map((item, index) => (
+                <div className="text-muted-foreground" key={index}>
+                  <span className="font-bold">{item.name}: </span>
+                  <span>{item.score}</span>
+                </div>
+              ))}
             </div>
           </CardDescription>
         </div>
       </CardContent>
-      <CardFooter>
-        <p className="text-sm text-muted-foreground">
-          Interview By: {props.aiAgent}
-        </p>
-      </CardFooter>
+      <CardFooter></CardFooter>
     </Card>
   );
 }

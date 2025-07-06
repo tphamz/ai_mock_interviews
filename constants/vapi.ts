@@ -1,9 +1,10 @@
 import { CreateAssistantDTO } from "@vapi-ai/web/dist/api";
+import { tool } from "ai";
 
 export const interviewer: CreateAssistantDTO = {
   name: "Interviewer",
   firstMessage:
-    "Hello! Thank you for taking the time to speak with me today. I'm excited to learn more about you and your experience.",
+    "Hello! Thank you for taking the time to speak with me today. I'm excited to learn more about you and your experience. Are you ready?",
   transcriber: {
     provider: "deepgram",
     model: "nova-2",
@@ -14,6 +15,7 @@ export const interviewer: CreateAssistantDTO = {
     voiceId: "Hana",
   },
   model: {
+    toolIds: [process.env.NEXT_PUBLIC_VAPI_END_CALL_TOOL_ID as string],
     provider: "openai",
     model: "gpt-4",
     messages: [
@@ -43,9 +45,6 @@ Conclude the interview properly:
 Thank the candidate for their time.
 Inform them that the company will reach out soon with feedback.
 End the conversation on a polite and positive note.
-
-
-- Be sure to be professional and polite.
 - Keep all your responses short and simple. Use official language, but be kind and welcoming.
 - This is a voice conversation, so keep your responses short, like in a real conversation. Don't ramble for too long.`,
       },

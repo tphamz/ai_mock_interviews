@@ -8,41 +8,36 @@ export async function withAuth<T>(callback: (user: any) => Promise<T>) {
   if (!user) {
     return { status: 403 };
   }
-  return callback(user);
+  const res = await getUserDetail(user);
+  if (!res) return { status: 403 };
+  return callback(res);
 }
 
-const handleIsAuthenticate = async (user: any) => {
+const getUserDetail = async (clerkUser: any) => {
   try {
-    const userExist = await prismaClient.user.findUnique({
+    const user = await prismaClient.user.findUnique({
       where: {
-        clerkId: user.id,
+        clerkId: clerkUser.id,
       },
     });
 
-    if (userExist) {
-      return {
-        status: 200,
-        user: userExist,
-      };
-    }
-
+    if (user) return user;
     const newUser = await prismaClient.user.create({
       data: {
-        clerkId: user.id,
-        email: user.emailAddresses[0].emailAddress,
-        name: user.firstName + " " + user.lastName,
-        profileImage: user.imageUrl,
+        clerkId: clerkUser.id,
+        email: clerkUser.emailAddresses[0].emailAddress,
+        name: clerkUser.firstName + " " + clerkUser.lastName,
+        profileImage: clerkUser.imageUrl,
       },
     });
-
-    if (newUser) {
-      return { status: 201, user: newUser };
-    }
-    return { status: 400 };
-  } catch (error) {
-    console.log("🔴 ERROR", error);
-    return { status: 500, error: "Internal Server Error" };
+    return newUser;
+  } catch (err) {
+    return null;
   }
+};
+
+const handleIsAuthenticate = async (user: any) => {
+  return { status: 200, data: user };
 };
 
 export const isAuthenticated = async () => {

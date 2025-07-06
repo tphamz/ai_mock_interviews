@@ -30,21 +30,8 @@ type CreateInterviewProps = {
   userId: string;
 };
 
-export async function getCreateInterviewSummary(id: string) {
-  try {
-    const res = await vapiAPI.calls.get(id);
-    if (!res) return { status: 400, error: "Call is not found" };
-    console.log(res);
-    return res.analysis?.summary;
-  } catch (error) {
-    console.error("🔴 Error::", error);
-    return { status: 500, error: "Internal Server Error" };
-  }
-}
-
 export async function createInterview(params: CreateInterviewProps) {
   try {
-    console.log("params::", params);
     const res = await generateText({
       model: openai("gpt-4o"),
       prompt: createInterviewPrompt(params),
@@ -99,6 +86,20 @@ export const getInterviews = async ({
         data.totalPage = Math.ceil(totalCount / limit);
       }
       return { status: 200, data };
+    } catch (error) {
+      console.error("🔴 Error::", error);
+      return { status: 500, error: "Internal Server Error" };
+    }
+  });
+
+export const getInterviewById = async (id: string) =>
+  await withAuth(async (user: any) => {
+    try {
+      const item = await prismaClient.interview.findUnique({
+        where: { id, ownerId: user.id },
+      });
+      if (!item) return { status: 404, error: "No Interviews found" };
+      return { status: 200, data: item };
     } catch (error) {
       console.error("🔴 Error::", error);
       return { status: 500, error: "Internal Server Error" };

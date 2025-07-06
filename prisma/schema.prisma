@@ -47,6 +47,7 @@ model Feedback {
   userId              String     @db.Uuid
   Interview           Interview? @relation(fields: [interviewId], references: [id])
   interviewId         String?    @db.Uuid
+  sampleInterviewId   String?
   totalScore          Float
   categoryScores      Json[]
   strengths           String[]

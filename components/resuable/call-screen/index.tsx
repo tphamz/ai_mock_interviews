@@ -5,31 +5,35 @@ import { User } from "@prisma/client";
 import { Bot, Loader2, Phone, PhoneMissed } from "lucide-react";
 import CallProfile from "../call-profile/call-profile";
 import { CALL_STATUS, useVapi } from "@/hooks/use-vapi";
+import { useEffect } from "react";
 type Props = {
   user?: User;
   vapiArgs: any[];
   onCallEnded: (val: any) => any;
   type: "generate-interview" | "start-interview";
 };
+let prevCallStatus = CALL_STATUS.INACTIVE;
 export default function CallScreen({
   user,
   vapiArgs,
   onCallEnded,
   type,
 }: Props) {
-  const {
-    isSpeechActive,
-    callStatus,
-    activeTranscript,
-    messages,
-    start,
-    stop,
-    toggleCall,
-  } = useVapi(vapiArgs, onCallEnded);
+  const { callStatus, activeTranscript, messages, start, stop, toggleCall } =
+    useVapi(vapiArgs);
   const handleCallClick = () => {
     if (callStatus === CALL_STATUS.ACTIVE) return stop();
     start();
   };
+
+  useEffect(() => {
+    if (
+      callStatus === CALL_STATUS.INACTIVE &&
+      prevCallStatus === CALL_STATUS.ACTIVE
+    )
+      onCallEnded(messages);
+    prevCallStatus = callStatus;
+  }, [callStatus]);
 
   return (
     <div className="relative flex flex-col md:flex-row w-full h-full gap-4">

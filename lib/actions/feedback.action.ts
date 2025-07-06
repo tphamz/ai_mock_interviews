@@ -1,3 +1,5 @@
+"use server";
+
 import {
   createFeedbackPrompt,
   feedbackSchema,
@@ -20,13 +22,19 @@ type GetFeedbacksProps = {
 type GetFeedbackParamsProps = {
   interviewId?: string;
   page?: number;
-  limit: number;
+  limit?: number;
 };
 
-export async function createFeedback(params: CreateFeedbackParams) {
-  return await withAuth(async (user: any) => {
-    const { interviewId, userId, transcript, feedbackId } = params;
+type CreateFeedbackParams = {
+  sampleInterviewId?: string;
+  interviewId?: string;
+  userId: string;
+  transcript: { role: string; transcript: string }[];
+  feedbackId?: string;
+};
 
+export const createFeedback = async (params: CreateFeedbackParams) =>
+  await withAuth(async (user: any) => {
     try {
       const { object }: { object: any } = await generateObject({
         model: openai("gpt-4o", {
@@ -36,18 +44,18 @@ export async function createFeedback(params: CreateFeedbackParams) {
         prompt: createFeedbackPrompt({
           transcript: params.transcript
             .map(
-              (sentence: { role: string; content: string }) =>
-                `- ${sentence.role}: ${sentence.content}\n`
+              ({ role, transcript }: { role: string; transcript: string }) =>
+                `- ${role}: ${transcript}\n`
             )
             .join(""),
         }),
         system: feedbackSystem,
       });
-
       const data = await prismaClient.feedback.create({
         data: {
           interviewId: params.interviewId,
-          userId: userId,
+          sampleInterviewId: params.sampleInterviewId,
+          userId: params.userId,
           totalScore: object.totalScore,
           categoryScores: object.categoryScores,
           strengths: object.strengths,
@@ -63,12 +71,11 @@ export async function createFeedback(params: CreateFeedbackParams) {
       return { status: 500, error: "Internal Server Error" };
     }
   });
-}
 
 export async function getFeedbacks({
   interviewId,
   page = 1,
-  limit,
+  limit = 10,
 }: GetFeedbackParamsProps) {
   return await withAuth(async (user: any) => {
     try {
@@ -81,6 +88,11 @@ export async function getFeedbacks({
         orderBy: { createdAt: "desc" },
         skip,
         take,
+        include: {
+          Interview: {
+            select: { role: true, level: true, techStack: true, type: true },
+          },
+        },
       });
       if (!items) return { status: 404, error: "Feedbacks not found" };
       const data: GetFeedbacksProps = { items, page, limit };

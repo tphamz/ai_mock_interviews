@@ -43,10 +43,7 @@ enum TranscriptMessageTypeEnum {
 }
 
 let callDetail: any = null;
-export function useVapi(
-  vapiArgs: any,
-  handleCallEnd?: (callDetail: any) => any
-) {
+export function useVapi(vapiArgs: any) {
   const [isSpeechActive, setIsSpeechActive] = useState(false);
   const [callStatus, setCallStatus] = useState<CALL_STATUS>(
     CALL_STATUS.INACTIVE
@@ -72,9 +69,7 @@ export function useVapi(
     };
 
     const onCallEnd = () => {
-      console.log("Call has stopped");
       setCallStatus(CALL_STATUS.INACTIVE);
-      if (handleCallEnd) handleCallEnd(callDetail);
     };
 
     const onVolumeLevel = (volume: number) => {
@@ -82,7 +77,6 @@ export function useVapi(
     };
 
     const onMessageUpdate = (message: Message) => {
-      console.log("message", message);
       if (message.type === MessageTypeEnum.ANALYSIS) console.log(message);
       if (
         message.type === MessageTypeEnum.TRANSCRIPT &&

@@ -17,10 +17,10 @@ const interviewTypes = new Map([
   ["Behavioral", "bg-blue-500 text-white dark:bg-blue-600"],
 ]);
 export default function InterviewCard(
-  props: Interview & { className: string; onAction: () => void }
+  props: Interview & { className: string; onAction: (id: string) => void }
 ) {
   return (
-    <Card className={`group relative ${props.className}`}>
+    <Card className={`group relative ${props.className} swing-in-top-fwd`}>
       <CardHeader>
         <div className="flex row-flex justify-between items-center">
           <CardTitle>{props.role}</CardTitle>
@@ -51,7 +51,7 @@ export default function InterviewCard(
           <Button
             className="w-full rounded-2xl"
             variant="secondary"
-            onClick={props.onAction}
+            onClick={() => props.onAction(props.id)}
           >
             <Play />
             Start the Interview

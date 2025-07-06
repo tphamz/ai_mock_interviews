@@ -36,33 +36,22 @@ const sampelInterviewProgress = [
 let interval: any;
 export default function Dashboard() {
   const router = useRouter();
-  const onAction = () => {
-    console.log("onAction");
+  const onAction = (id: string) => {
+    router.push(`interviews/${id}/start`);
   };
 
   return (
     <div className="flex flex-col gap-15 relative">
+      <div className="swing-in-top-fwd w-20 h-20 bg-blue-50" />
       <div className="flex flex-col gap-4">
         <h1 className="text-2xl font-bold">Your Results</h1>
         <div className="flex flex-row items-center w-full h-full flex-wrap gap-4">
           {sampelInterviewProgress.map((item: any, index: number) => (
-            <AnimatedContent
-              key={index}
-              distance={10}
-              direction="vertical"
-              reverse={false}
-              duration={1}
-              ease="power3.out"
-              initialOpacity={0}
-              animateOpacity
-              delay={0.3}
-            >
-              <FeedbackCard
-                {...item}
-                onAction={onAction}
-                className="w-[450px] h-[200px] border-muted"
-              />
-            </AnimatedContent>
+            <FeedbackCard
+              {...item}
+              onAction={onAction}
+              className="w-[450px] h-[200px] border-muted"
+            />
           ))}
         </div>
       </div>
@@ -70,26 +59,15 @@ export default function Dashboard() {
         <h1 className="text-2xl font-bold">Available Interviews</h1>
         <div className="flex flex-row items-center w-full h-full flex-wrap gap-4">
           {interviews.map((item: any, index: number) => (
-            <AnimatedContent
-              key={index}
-              distance={10}
-              direction="vertical"
-              reverse={false}
-              duration={1}
-              ease="power3.out"
-              initialOpacity={0}
-              animateOpacity
-              delay={0.3}
-            >
-              <InterviewCard
-                {...item}
-                onAction={onAction}
-                className="w-[450px] h-[250px] border-muted"
-              />
-            </AnimatedContent>
+            <InterviewCard
+              {...item}
+              onAction={onAction}
+              className="w-[450px] h-[250px] border-muted"
+            />
           ))}
         </div>
       </div>
+
       <Button onClick={() => router.push("/interviews/create")}>
         Create an Interview
       </Button>

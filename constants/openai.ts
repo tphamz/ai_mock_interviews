@@ -22,7 +22,6 @@ export const createFeedbackPrompt = (params: {
 }) => `You are an AI interviewer analyzing a mock interview. Your task is to evaluate the candidate based on structured categories. Be thorough and detailed in your analysis. Don't be lenient with the candidate. If there are mistakes or areas for improvement, point them out.
         Transcript:
         ${params.transcript}
-
         Please score the candidate from 0 to 5 in the following areas. Do not add categories other than the ones provided:
         - **Communication Skills**: Clarity, articulation, structured responses.
         - **Technical Knowledge**: Understanding of key concepts for the role.
@@ -35,33 +34,21 @@ export const feedbackSystem = `You are a professional interviewer analyzing a mo
 
 export const feedbackSchema = z.object({
   totalScore: z.number(),
-  categoryScores: z.tuple([
-    z.object({
-      name: z.literal("Communication Skills"),
-      score: z.number(),
-      comment: z.string(),
-    }),
-    z.object({
-      name: z.literal("Technical Knowledge"),
-      score: z.number(),
-      comment: z.string(),
-    }),
-    z.object({
-      name: z.literal("Problem Solving"),
-      score: z.number(),
-      comment: z.string(),
-    }),
-    z.object({
-      name: z.literal("Cultural Fit"),
-      score: z.number(),
-      comment: z.string(),
-    }),
-    z.object({
-      name: z.literal("Confidence and Clarity"),
-      score: z.number(),
-      comment: z.string(),
-    }),
-  ]),
+  categoryScores: z
+    .array(
+      z.object({
+        name: z.enum([
+          "Communication Skills",
+          "Technical Knowledge",
+          "Problem Solving",
+          "Cultural Fit",
+          "Confidence and Clarity",
+        ]),
+        score: z.number(),
+        comment: z.string(),
+      })
+    )
+    .length(5),
   strengths: z.array(z.string()),
   areasForImprovement: z.array(z.string()),
 });
