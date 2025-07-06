@@ -4,6 +4,7 @@ export async function POST(request: Request) {
   try {
     const { type, role, level, techStack, numberOfQuestions, userId } =
       await request.json();
+    console.log("post::vapi::userId::", userId);
     const response = await createInterview({
       type,
       role,
