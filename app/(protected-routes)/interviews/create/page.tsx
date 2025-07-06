@@ -26,11 +26,9 @@ export default function CreateInterviewPage() {
       vapiArgs={[
         process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID,
         {
-          assistantOverrides: {
-            variableValues: {
-              name: user.name,
-              userId: user.id,
-            },
+          variableValues: {
+            name: user.name,
+            userId: user.id,
           },
         },
       ]}
