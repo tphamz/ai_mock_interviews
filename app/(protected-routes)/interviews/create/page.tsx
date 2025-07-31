@@ -1,40 +1,20 @@
-"use client";
-import CallScreen from "@/components/resuable/call-screen";
-import { isAuthenticated } from "@/lib/actions/auth.action";
-import { User } from "@prisma/client";
-import { Message } from "ai";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Subtitle, Title } from "@/components/resuable/title";
+import CreateInterviewOptions from "./_create-options";
 
 export default function CreateInterviewPage() {
-  const [user, setUser] = useState<User | null>(null);
-  const router = useRouter();
-  useEffect(() => {
-    (async () => {
-      const authenticatedUser: any = await isAuthenticated();
-      if (authenticatedUser.data) setUser(authenticatedUser.data);
-    })();
-  }, []);
-
-  const onCallEnd = async (callDetail: any) => {
-    return router.push("/interviews");
-  };
-
-  if (!user) return <></>;
   return (
-    <CallScreen
-      vapiArgs={[
-        process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID,
-        {
-          variableValues: {
-            name: user.name,
-            userId: user.id,
-          },
-        },
-      ]}
-      user={user}
-      onCallEnded={onCallEnd}
-      type="generate-interview"
-    />
+    <div className="w-full flex flex-col items-center gap-20">
+      <div>
+        <Title>How would you like to build your interview today?</Title>
+        <Subtitle>
+          Use AI voice, custom inputs, or your own questions to begin your
+          interview.
+        </Subtitle>
+      </div>
+
+      <div className="w-full flex flex-col items-center gap-5 flew-wrap md:flex-row justify-center">
+        <CreateInterviewOptions />
+      </div>
+    </div>
   );
 }

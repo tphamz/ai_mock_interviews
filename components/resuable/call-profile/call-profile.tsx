@@ -1,7 +1,8 @@
 "use client";
 import Orb from "@/components/animations/Orb/Orb";
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
-import { ReactNode, useMemo } from "react";
+import { ReactNode, useMemo, useRef } from "react";
+import animations from "../animations";
 
 export default function CallProfile({
   profile,
@@ -18,7 +19,7 @@ export default function CallProfile({
 }) {
   const hollowColor = useMemo(() => Math.floor(361 * Math.random()), []);
   return (
-    <div
+    <animations.ScaleBounce
       className={`${className} w-[240px] h-[240px] rounded-[50%] relative flex flex-col justify-center items-center`}
     >
       <Avatar className="w-[160px] h-[160px] flex flex-row justify-center items-center bg-muted rounded-full interview-cover z-1 text-amber-50 overflow-hidden">
@@ -53,6 +54,6 @@ export default function CallProfile({
           forceHoverState
         />
       </div>
-    </div>
+    </animations.ScaleBounce>
   );
 }

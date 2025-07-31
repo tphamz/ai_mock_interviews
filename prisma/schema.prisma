@@ -29,9 +29,10 @@ model User {
 
 model Interview {
   id               String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  role             String     @db.VarChar(255)
-  level            String
-  type             String
+  role             String?    @db.VarChar(255)
+  level            String?
+  type             String?
+  mode             String?
   techStack        String[]
   owner            User       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId          String     @db.Uuid

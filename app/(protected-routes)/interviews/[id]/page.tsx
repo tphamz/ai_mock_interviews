@@ -1,7 +1,5 @@
-"use client";
-import { useRouter } from "next/router";
+import { redirect } from "next/navigation";
 
 export default function InterviewDetail() {
-  const router = useRouter();
-  return router.push("/interviews");
+  return redirect("/interviews");
 }

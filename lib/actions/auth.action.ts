@@ -2,26 +2,26 @@
 
 import { prismaClient } from "@/lib/prisma.sdk";
 import { currentUser } from "@clerk/nextjs/server";
+import { clerkClient } from "@clerk/clerk-sdk-node";
 
 export async function withAuth<T>(callback: (user: any) => Promise<T>) {
-  const user = await currentUser();
+  let user: any = await currentUser();
   if (!user) {
     return { status: 403 };
   }
-  const res = await getUserDetail(user);
+  if (user.publicMetadata.userId) return callback(user);
+  const res = await createUser(user);
   if (!res) return { status: 403 };
-  return callback(res);
+  user = await clerkClient.users.updateUser(user.id, {
+    publicMetadata: {
+      userId: res.id,
+    },
+  });
+  return callback(user);
 }
 
-const getUserDetail = async (clerkUser: any) => {
+const createUser = async (clerkUser: any) => {
   try {
-    const user = await prismaClient.user.findUnique({
-      where: {
-        clerkId: clerkUser.id,
-      },
-    });
-
-    if (user) return user;
     const newUser = await prismaClient.user.create({
       data: {
         clerkId: clerkUser.id,

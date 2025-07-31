@@ -1,12 +1,8 @@
 "use client";
-import AnimatedContent from "@/components/animations/AnimatedContent/AnimatedContent";
-import CallProfile from "@/components/resuable/call-profile/call-profile";
 import InterviewCard from "@/components/resuable/cards/interview-card";
 import FeedbackCard from "@/components/resuable/cards/feedback-card";
 import interviews from "@/constants/interviews.json";
-import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Router } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const sampelInterviewProgress = [

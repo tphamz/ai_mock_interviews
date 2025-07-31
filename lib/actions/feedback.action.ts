@@ -55,7 +55,7 @@ export const createFeedback = async (params: CreateFeedbackParams) =>
         data: {
           interviewId: params.interviewId,
           sampleInterviewId: params.sampleInterviewId,
-          userId: params.userId,
+          userId: user.publicMetadata.userId,
           totalScore: object.totalScore,
           categoryScores: object.categoryScores,
           strengths: object.strengths,
@@ -81,7 +81,7 @@ export async function getFeedbacks({
     try {
       const skip = (page - 1) * limit;
       const take = limit;
-      const where: any = { userId: user.id };
+      const where: any = { userId: user.publicMetadata.userId };
       if (interviewId) where.interviewId = interviewId;
       const items = await prismaClient.feedback.findMany({
         where,
@@ -90,7 +90,13 @@ export async function getFeedbacks({
         take,
         include: {
           Interview: {
-            select: { role: true, level: true, techStack: true, type: true },
+            select: {
+              role: true,
+              level: true,
+              techStack: true,
+              type: true,
+              questions: true,
+            },
           },
         },
       });

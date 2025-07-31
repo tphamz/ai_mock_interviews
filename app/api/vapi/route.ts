@@ -1,11 +1,10 @@
-import { createInterview } from "@/lib/actions/interview.action";
+import { generateInterview } from "@/lib/actions/interview.action";
 
 export async function POST(request: Request) {
   try {
     const { type, role, level, techStack, numberOfQuestions, userId } =
       await request.json();
-    console.log("post::vapi::userId::", userId);
-    const response = await createInterview({
+    const response = await generateInterview({
       type,
       role,
       level,
@@ -31,6 +30,5 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
-  console.log("I am here");
   return Response.json({ success: true, data: "Thank you!" }, { status: 200 });
 }
