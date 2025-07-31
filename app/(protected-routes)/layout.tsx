@@ -56,7 +56,7 @@ export default async function ProtectedLayout({
         </Header>
         <div className="px-4 @container min-h-[80vh]">
           <div className="w-full max-w-6xl mx-auto h-full">
-            <div className="flex flex-col w-full h-full items-center !overflow-hidden  py-10">
+            <div className="flex flex-col w-full h-full items-center !overflow-hidden px-4 md:px-5 py-10">
               <div className="w-full h-full">{children}</div>
             </div>
           </div>
