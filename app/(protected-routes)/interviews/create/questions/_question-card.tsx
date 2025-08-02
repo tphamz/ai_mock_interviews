@@ -54,7 +54,8 @@ export default function QuestionCard({
         ref={setNodeRef}
         className="border-none shadow-sm w-full rounded-xl"
       >
-        <CardContent className="flex row-flex justify-between no-wrap">
+        <CardContent className="flex row-flex justify-between no-wrap gap-3 items-center">
+          <span className="text-lg font-semibold">{index + 1}</span>
           <Input
             required
             placeholder="Add a new question"
