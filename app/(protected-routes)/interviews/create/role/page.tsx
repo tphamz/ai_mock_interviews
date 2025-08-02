@@ -3,7 +3,7 @@ import RoleForm from "./_form";
 
 export default function CreateInterviewByRole() {
   return (
-    <div className="w-full h-full max-h-[100%] md:max-h-[80vh]  flex flex-col items-center gap-10">
+    <div className="w-full h-full  flex flex-col items-center gap-10 overflow-auto">
       <div>
         <Title>Build Your Interview with Your Inputs</Title>
         <Subtitle>
@@ -12,7 +12,7 @@ export default function CreateInterviewByRole() {
         </Subtitle>
       </div>
 
-      <div className="w-full h-full flex flex-col items-center overflow-auto">
+      <div className="w-full h-full flex flex-col items-center">
         <RoleForm />
       </div>
     </div>

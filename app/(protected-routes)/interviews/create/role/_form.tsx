@@ -43,7 +43,7 @@ export default function RoleForm() {
   };
 
   return (
-    <>
+    <div className="w-full flex flex-col gap-5">
       <RadioPrompt
         label="Interview Type"
         list={["Behavioral", "Technical"]}
@@ -74,6 +74,6 @@ export default function RoleForm() {
           </Button>
         </animations.Appear>
       </div>
-    </>
+    </div>
   );
 }

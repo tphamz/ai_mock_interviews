@@ -26,7 +26,7 @@ export default function RadioPrompt({
     onDataChange(val);
   };
   return (
-    <animations.Stagger className="flex flex-col sm:flex-row justify-between mb-10 items-left rounded-xl bg-muted-foreground/10 w-full p-6">
+    <animations.Stagger className="flex flex-col sm:flex-row justify-between items-left rounded-xl bg-muted-foreground/10 w-full p-6">
       <div className="flex flex-col flex-grow">
         <span className="text-foreground text-lg font-bold">{label}</span>
         <RadioGroup

@@ -20,6 +20,7 @@ export default function PromptInput() {
   };
 
   const handleAdd = () => {
+    if (questions.length >= LIMIT) return;
     if (value.trim() === "") return;
     onAdd(value);
     setValue("");
@@ -33,14 +34,14 @@ export default function PromptInput() {
   };
 
   return (
-    <>
+    <div className="w-full flex flex-col gap-5 mb-10">
       <RadioPrompt
         label=""
         list={["Behavioral", "Technical"]}
         data={type}
         onDataChange={(value) => onTypeChange(value)}
       />
-      <animations.Stagger className="flex flex-col sm:flex-row justify-between mb-15 items-center rounded-xl bg-muted-foreground/10 w-full p-6">
+      <animations.Stagger className="flex flex-col sm:flex-row justify-between items-center rounded-xl bg-muted-foreground/10 w-full p-6">
         <Input
           required
           placeholder="Enter a question to add to the list..."
@@ -54,6 +55,6 @@ export default function PromptInput() {
           <Reset onReset={handleReset} />
         </div>
       </animations.Stagger>
-    </>
+    </div>
   );
 }
