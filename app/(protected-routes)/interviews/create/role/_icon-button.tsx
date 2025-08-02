@@ -4,14 +4,18 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Plus } from "lucide-react";
+import { ReactNode } from "react";
 
-export default function Add({
-  onAdd,
+export default function IconButton({
+  onClick = () => {},
+  label = "",
+  icon,
   disabled = false,
 }: {
-  onAdd: () => void;
+  onClick?: () => void;
   disabled?: boolean;
+  label?: string;
+  icon: ReactNode;
 }) {
   return (
     <Tooltip>
@@ -19,15 +23,15 @@ export default function Add({
         <Button
           disabled={disabled}
           variant="ghost"
-          onClick={onAdd}
+          onClick={onClick}
           size="icon"
-          aria-label="Add Question"
+          aria-label={label}
         >
-          <Plus className="w-4 h-4" />
+          {icon}
         </Button>
       </TooltipTrigger>
       <TooltipContent>
-        <p>Add</p>
+        <p>{label}</p>
       </TooltipContent>
     </Tooltip>
   );

@@ -45,7 +45,7 @@ export default function CreateInterviewOptions() {
   return (
     <>
       {options.map((option, index) => (
-        <NeonCard key={index} className="border-none">
+        <NeonCard key={index} className="border-none flex-auto md:flex-1/3">
           <CardHeader className="text-center pb-2 relative">
             <CardTitle className="text-2xl font-bold">{option.title}</CardTitle>
           </CardHeader>

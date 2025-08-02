@@ -1,3 +1,4 @@
+import { type } from "os";
 import { create } from "zustand";
 
 type Question = {
@@ -7,16 +8,19 @@ type Question = {
 type Props = {
   LIMIT: number;
   questions: Question[];
+  type: string;
   onAdd: (val: string) => void;
   onRemove: (index: number) => void;
   onUpdate: (index: number, val: string) => void;
   onReset: () => void;
   onSetQuestions: (questions: Question[]) => void;
+  onTypeChange: (type: string) => void;
 };
 
 export const useCreateQuestions = create<Props>((set) => ({
   LIMIT: 3,
   questions: [],
+  type: "Behavioral",
   onAdd: (val: string) =>
     set(({ questions }) => ({
       questions: [...questions, { id: Date.now(), value: val }],
@@ -33,5 +37,6 @@ export const useCreateQuestions = create<Props>((set) => ({
         questions: [...questions],
       };
     }),
+  onTypeChange: (type: string) => set(() => ({ type })),
   onSetQuestions: (questions: Question[]) => set(() => ({ questions })),
 }));

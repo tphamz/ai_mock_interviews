@@ -48,13 +48,13 @@ export default function InterviewList({ data = [] }: Props) {
           </Button>
         </animations.ScaleBounce>
       </div>
-      <div className="flex flex-row w-full h-full flex-wrap gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full h-full gap-4">
         {data.map((item: any, index: number) => (
           <InterviewCard
             key={item.id}
             {...item}
             onAction={(id) => redirect(`/interviews/${id}/start`)}
-            className="w-[450px] h-[250px] border-muted"
+            className="w-full h-[250px] border-muted"
           />
         ))}
       </div>

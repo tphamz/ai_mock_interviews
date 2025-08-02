@@ -21,8 +21,8 @@ export default function InterviewCard(
   props: Interview & { className: string; onAction: (id: string) => void }
 ) {
   return (
-    <animations.Stagger>
-      <Card className={`group relative ${props.className}`}>
+    <animations.Stagger className={`${props.className}`}>
+      <Card className={`group relative`}>
         <CardHeader>
           <div className="flex row-flex justify-between items-center">
             <CardTitle>{props.role}</CardTitle>

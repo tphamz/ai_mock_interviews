@@ -5,9 +5,11 @@ import Reset from "./_reset";
 import { useState } from "react";
 import { useCreateQuestions } from "@/lib/stores/useCreateQuestions";
 import animations from "@/components/resuable/animations";
+import RadioPrompt from "../role/_radio";
 
 export default function PromptInput() {
-  const { questions, onReset, onAdd, LIMIT } = useCreateQuestions();
+  const { questions, onReset, onAdd, LIMIT, type, onTypeChange } =
+    useCreateQuestions();
   const [value, setValue] = useState("");
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) =>
     setValue(evt.target.value);
@@ -31,19 +33,27 @@ export default function PromptInput() {
   };
 
   return (
-    <animations.Stagger className="flex flex-col sm:flex-row justify-between mb-15 items-center rounded-xl bg-muted-foreground/10 w-full p-6">
-      <Input
-        required
-        placeholder="Enter a question to add to the list..."
-        className="text-base sm:text-xl border-0 focus-visible:ring-0 shadow-none p-0 !bg-transparent flex-grow"
-        value={value}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
+    <>
+      <RadioPrompt
+        label=""
+        list={["Behavioral", "Technical"]}
+        data={type}
+        onDataChange={(value) => onTypeChange(value)}
       />
-      <div className="flex items-center gap-3">
-        {questions.length < LIMIT && <Add onAdd={handleAdd} />}
-        <Reset onReset={handleReset} />
-      </div>
-    </animations.Stagger>
+      <animations.Stagger className="flex flex-col sm:flex-row justify-between mb-15 items-center rounded-xl bg-muted-foreground/10 w-full p-6">
+        <Input
+          required
+          placeholder="Enter a question to add to the list..."
+          className="text-base sm:text-xl border-0 focus-visible:ring-0 shadow-none p-0 !bg-transparent flex-grow"
+          value={value}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+        />
+        <div className="flex items-center gap-3">
+          {questions.length < LIMIT && <Add onAdd={handleAdd} />}
+          <Reset onReset={handleReset} />
+        </div>
+      </animations.Stagger>
+    </>
   );
 }

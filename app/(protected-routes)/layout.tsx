@@ -1,13 +1,5 @@
 import Header from "@/components/resuable/header";
 import { AppSidebar } from "@/components/resuable/app-side-bar";
-import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbSeparator,
-  BreadcrumbPage,
-} from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import {
   SidebarProvider,

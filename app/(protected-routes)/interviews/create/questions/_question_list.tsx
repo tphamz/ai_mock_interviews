@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   DndContext,
   closestCenter,
@@ -17,10 +17,16 @@ import QuestionCard from "./_question-card";
 import { useCreateQuestions } from "@/lib/stores/useCreateQuestions";
 import { Button } from "@/components/ui/button";
 import animations from "@/components/resuable/animations";
+import { RefreshCcw } from "lucide-react";
+import { createInterviewFromQuestions } from "@/lib/actions/interview.action";
+import { redirect } from "next/navigation";
+import { toast } from "sonner";
 
 export default function QuestionList() {
-  const { questions, onSetQuestions, onUpdate, LIMIT } = useCreateQuestions();
+  const { questions, type, onSetQuestions, onUpdate, LIMIT } =
+    useCreateQuestions();
   const sensors = useSensors(useSensor(PointerSensor));
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
@@ -44,6 +50,17 @@ export default function QuestionList() {
   const handleAddQuestion = (index: number) => {
     questions.splice(index + 1, 0, { id: Date.now(), value: "" });
     onSetQuestions([...questions]);
+  };
+
+  const onCreate = async () => {
+    setLoading(true);
+    const res = await createInterviewFromQuestions({
+      questions: questions.map((item) => item.value) as any,
+      type,
+    });
+    setLoading(false);
+    if (res.error) toast.error("Error", { description: res.error });
+    return redirect("/interviews");
   };
 
   useEffect(() => {
@@ -76,9 +93,11 @@ export default function QuestionList() {
       </DndContext>
       <animations.Stagger>
         <Button
+          onClick={onCreate}
           className="p-5 cursor-pointer mt-5"
-          disabled={!questions.length}
+          disabled={loading || !questions.length}
         >
+          {loading && <RefreshCcw className="animate-spin" />}
           Create Interview
         </Button>
       </animations.Stagger>

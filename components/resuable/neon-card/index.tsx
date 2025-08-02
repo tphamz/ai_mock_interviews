@@ -27,13 +27,8 @@ export default function NeonCard({ children, ...rest }: NeonCardProps) {
     });
   };
   return (
-    <animations.Stagger options={{ duration: 0.5, delay: 1 }}>
-      <Card
-        ref={ref}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        {...rest}
-      >
+    <animations.Stagger options={{ duration: 0.5, delay: 1 }} {...rest}>
+      <Card ref={ref} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
         {children}
       </Card>
     </animations.Stagger>

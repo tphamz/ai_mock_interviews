@@ -9,10 +9,14 @@ import { openai } from "@ai-sdk/openai";
 import { generateObject } from "ai";
 import { withAuth } from "./auth.action";
 import { findCount, prismaClient } from "../prisma.sdk";
-import { Feedback } from "@prisma/client";
+import { Feedback, Interview } from "@prisma/client";
 
-type GetFeedbacksProps = {
-  items: Feedback[];
+export type FeedbackItem = Feedback & {
+  Interview?: Interview;
+};
+
+export type GetFeedbacksProps = {
+  items: FeedbackItem[];
   total?: number;
   totalPage?: number;
   page: number;
@@ -23,6 +27,7 @@ type GetFeedbackParamsProps = {
   interviewId?: string;
   page?: number;
   limit?: number;
+  include?: any;
 };
 
 type CreateFeedbackParams = {
@@ -56,7 +61,14 @@ export const createFeedback = async (params: CreateFeedbackParams) =>
           interviewId: params.interviewId,
           sampleInterviewId: params.sampleInterviewId,
           userId: user.publicMetadata.userId,
-          totalScore: object.totalScore,
+          totalScore: parseFloat(
+            (
+              object.categoryScores.reduce(
+                (res: number, item: { score: number }) => res + item.score || 0,
+                0
+              ) / object.categoryScores.length
+            ).toFixed(2)
+          ),
           categoryScores: object.categoryScores,
           strengths: object.strengths,
           areasForImprovement: object.areasForImprovement,
@@ -72,11 +84,26 @@ export const createFeedback = async (params: CreateFeedbackParams) =>
     }
   });
 
-export async function getFeedbacks({
+export const getFeedbacks: (params: GetFeedbackParamsProps) => Promise<{
+  status: number;
+  error?: string;
+  data?: GetFeedbacksProps;
+}> = async ({
   interviewId,
   page = 1,
   limit = 10,
-}: GetFeedbackParamsProps) {
+  include = {
+    Interview: {
+      select: {
+        role: true,
+        level: true,
+        techStack: true,
+        type: true,
+        questions: true,
+      },
+    },
+  },
+}) => {
   return await withAuth(async (user: any) => {
     try {
       const skip = (page - 1) * limit;
@@ -88,17 +115,7 @@ export async function getFeedbacks({
         orderBy: { createdAt: "desc" },
         skip,
         take,
-        include: {
-          Interview: {
-            select: {
-              role: true,
-              level: true,
-              techStack: true,
-              type: true,
-              questions: true,
-            },
-          },
-        },
+        include,
       });
       if (!items) return { status: 404, error: "Feedbacks not found" };
       const data: GetFeedbacksProps = { items, page, limit };
@@ -113,4 +130,4 @@ export async function getFeedbacks({
       return { status: 500, error: "Internal Server Error" };
     }
   });
-}
+};

@@ -12,7 +12,7 @@ export default function CreateInterviewByRole() {
         </Subtitle>
       </div>
 
-      <div className="w-full h-full flex flex-col items-center">
+      <div className="w-full h-full flex flex-col items-center overflow-auto">
         <RoleForm />
       </div>
     </div>

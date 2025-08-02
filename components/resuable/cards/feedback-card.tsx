@@ -26,8 +26,11 @@ export default function FeedbackCard(props: FeedbackProps) {
       0
     ) / (props.categoryScores || []).length;
   return (
-    <animations.Stagger options={{ delay: 0.5 }}>
-      <Card className={`${props.className || ""}`}>
+    <animations.Stagger
+      options={{ delay: 0.5 }}
+      className={`${props.className || ""}`}
+    >
+      <Card>
         {props.interview && (
           <CardHeader>
             <div className="flex row-flex justify-between items-center">

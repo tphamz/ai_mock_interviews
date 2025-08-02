@@ -20,7 +20,7 @@ export function ScaleBounce({ children, options = {}, ...rest }: Props) {
         opacity: 0,
         duration: options.duration || 0.8,
         ease: options.ease || "back.out(1.7)",
-        delay: options.delay || 0.5,
+        delay: options.delay || 0,
       });
     }
   });

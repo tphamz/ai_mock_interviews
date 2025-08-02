@@ -30,11 +30,11 @@ type CreateInterviewProps = {
   userId: string;
 };
 
-export const generateInterview: (parmas: CreateInterviewProps) => Promise<{
+export const generateInterview: (params: CreateInterviewProps) => Promise<{
   status: number;
   error?: string;
   success?: boolean;
-}> = async (params: CreateInterviewProps) => {
+}> = async (params) => {
   try {
     const res = await generateText({
       model: openai("gpt-4o"),
@@ -61,7 +61,44 @@ export const generateInterview: (parmas: CreateInterviewProps) => Promise<{
   }
 };
 
-export const getInterviews: (parmas: GetInterviewsParamsProps) => Promise<{
+export const createInterviewFromInputs: (
+  params: CreateInterviewProps
+) => Promise<{
+  status: number;
+  error?: string;
+  success?: boolean;
+}> = async (params) =>
+  await withAuth(async (user: any) =>
+    generateInterview({ ...params, userId: user.publicMetadata.userId })
+  );
+
+export const createInterviewFromQuestions: (params: {
+  questions: string[];
+  type: string;
+}) => Promise<{
+  status: number;
+  error?: string;
+  success?: boolean;
+}> = async (params) =>
+  await withAuth(async (user: any) => {
+    try {
+      const prismaResponse = await prismaClient.interview.create({
+        data: {
+          ...params,
+          ownerId: user.publicMetadata.userId,
+          cover: `cover${Math.floor(10 * Math.random()) + 1}.jpg`,
+          createdAt: new Date().toISOString(),
+        },
+      });
+      if (!prismaResponse) throw new Error("failed to create interview");
+      return { status: 201, success: true };
+    } catch (error) {
+      console.error("🔴 Error::", error);
+      return { status: 500, error: "Internal Server Error" };
+    }
+  });
+
+export const getInterviews: (params: GetInterviewsParamsProps) => Promise<{
   status: number;
   error?: string;
   data?: GetInterviewsProps;
@@ -104,11 +141,9 @@ export const getInterviewById: (id: string) => Promise<{
 }> = async (id: string) =>
   await withAuth(async (user: any) => {
     try {
-      console.log({ id, ownerId: user.publicMetadata.userId });
       const item = await prismaClient.interview.findUnique({
         where: { id, ownerId: user.publicMetadata.userId },
       });
-      console.log(item);
       if (!item) return { status: 404, error: "No Interviews found" };
       return { status: 200, data: item };
     } catch (error) {

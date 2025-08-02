@@ -57,7 +57,7 @@ export default function FeedbackList({ data = [] }: Props) {
   return (
     <>
       <div className="w-full h-full flex flex-col gap-10">
-        <div className="flex flex-row w-full h-full flex-wrap gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full h-full gap-4">
           {feedbacks.map((item: FeedbackProps, index: number) => (
             <FeedbackCard
               onAction={(id) =>
@@ -65,9 +65,10 @@ export default function FeedbackList({ data = [] }: Props) {
               }
               key={index}
               {...item}
-              className="w-[450px] border-muted"
+              className="border-muted w-full"
             />
           ))}
+          <div className="flex-auto" />
         </div>
       </div>
       {Boolean(dialogDetail) && (

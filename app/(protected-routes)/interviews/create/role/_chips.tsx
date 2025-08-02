@@ -5,12 +5,13 @@ import { X, Plus } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import IconButton from "./_icon-button";
 
 type Props = {
   data?: string;
   label: string;
   placeholder: string;
-  onDataChange: (val: string[]) => void;
+  onDataChange: (val: string) => void;
 };
 
 const DEBOUNCE_TIMEOUT = 500;
@@ -37,14 +38,14 @@ export default function ChipPrompt({
     const result = [...values, value];
     setValues(result);
     setValue("");
-    onDataChange(result);
+    onDataChange(result.join(","));
   };
 
   const handleDelete = (index: number) => () => {
     values.splice(index, 1);
     const result = [...values];
     setValues(result);
-    onDataChange(result);
+    onDataChange(result.join(","));
   };
 
   return (
@@ -79,14 +80,12 @@ export default function ChipPrompt({
         </div>
       </div>
       <div className="flex items-center gap-3">
-        <Button
+        <IconButton
           disabled={!Boolean(value)}
-          size="icon"
-          className="rounded-4xl"
           onClick={handleAddValue}
-        >
-          <Plus className="w-6 h-6" />
-        </Button>
+          label="Add Skill"
+          icon={<Plus className="w-6 h-6" />}
+        />
       </div>
     </animations.Stagger>
   );
